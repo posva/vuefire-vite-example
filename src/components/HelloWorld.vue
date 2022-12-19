@@ -21,8 +21,15 @@ const db = useFirestore()
 // this could just be `doc(db, 'count', props.today)` but that wouldn't react to changes
 const todaysCountDoc = computed(() =>
   doc(db, 'count', props.today).withConverter<{ when: Timestamp; n: number }>({
-    // Here you could do validation if necessary
-    fromFirestore: (snapshot) => snapshot.data() as any,
+    fromFirestore: (snapshot) => {
+      // Here you could do validation
+      const data = snapshot.data()
+      return {
+        // the server can return null while the timestamp is updating, in that case create a placeholder timestamp
+        when: data.when instanceof Timestamp ? data.when : Timestamp.now(),
+        n: Number(data.n) ?? 0,
+      }
+    },
     toFirestore: (data) => data,
   })
 )
@@ -48,7 +55,7 @@ const rtf = new Intl.RelativeTimeFormat('en', { style: 'long' })
 function fromNow(date: Timestamp) {
   const now = START + elapsedSeconds.value * 1000
   return rtf.format(
-    Math.floor(((date?.toMillis() ?? now) - now) / 1000),
+    Math.floor(((date.toMillis() ?? now) - now) / 1000),
     'second'
   )
 }
