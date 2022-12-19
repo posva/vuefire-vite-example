@@ -1,5 +1,8 @@
 # Vite example with VueFire
 
+- [Demo on Stackblitz](https://stackblitz.com/github/posva/vuefire-vite-example?file=README.md)
+- [Online Demo](https://vite-vuefire.web.app/)
+
 This is a working example of how to use VueFire with Vite created with:
 
 ```sh
