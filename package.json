@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^9.7.0",
     "firebase": "^9.15.0",
     "vue": "^3.2.45",
     "vuefire": "^3.0.0-0"
