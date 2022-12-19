@@ -30,3 +30,7 @@ The options selected were:
 - Hosting
 
 Make sure to change the `public` directory to `dist`, configure as a single-page-app. If you set up GitHub actions, **make sure the repository is created** before calling `firebase init`. If you miss any step, that's fine you can call `firebase init` again and select only what you want to add.
+
+## GitHub Workflows
+
+The GitHub workflows you will find in this repository have been adapted from the generated ones to include a cache with pnpm.
