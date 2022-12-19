@@ -4,7 +4,7 @@ name: Deploy to Firebase Hosting on merge
     branches:
       - main
     paths-ignore:
-      - *.md
+      - '*.md'
       - .gitignore
 jobs:
   build_and_deploy:
