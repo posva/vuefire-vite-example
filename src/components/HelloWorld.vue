@@ -22,13 +22,11 @@ const db = useFirestore()
 const todaysCountDoc = computed(() =>
   doc(db, 'count', props.today).withConverter<{ when: Timestamp; n: number }>({
     fromFirestore: (snapshot) => {
-      // Here you could do validation
-      const data = snapshot.data()
-      return {
-        // the server can return null while the timestamp is updating, in that case create a placeholder timestamp
-        when: data.when instanceof Timestamp ? data.when : Timestamp.now(),
-        n: Number(data.n) ?? 0,
-      }
+      // Here you could do validation with a library like zod
+      return snapshot.data(
+        // this avoids having `null` while the server timestamp is updating
+        { serverTimestamps: 'estimate' }
+      ) as any
     },
     toFirestore: (data) => data,
   })
