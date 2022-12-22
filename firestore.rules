@@ -5,7 +5,7 @@ service cloud.firestore {
     // unused
 		match /users/{userId} {
       allow read;
-      allow write: if request.auth.uid == userId && request.resource.data.size() == 1 && request.resource.data.lastConnection == request.time;
+      // allow write: if request.auth.uid == userId && request.resource.data.size() == 1 && request.resource.data.lastConnection == request.time;
     }
 
     match /count/{day} {
