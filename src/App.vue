@@ -8,10 +8,20 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vite.svg" class="logo" alt="Vite logo" />
     </a>
     <a href="https://vuefire.vuejs.org" target="_blank">
-      <img src="/vuefire.svg" class="logo vuefire" alt="Vuefire logo" />
+      <img src="/vuefire.svg" class="logo vuefire" alt="VueFire logo" />
     </a>
   </div>
   <HelloWorld />
+  <p>
+    <a href="https://github.com/posva/vuefire-vite-example">
+      <img
+        src="./assets/github-mark.svg"
+        alt="GitHub logo"
+        class="logo github"
+      />
+      Source Code
+    </a>
+  </p>
 </template>
 
 <style scoped>
@@ -38,5 +48,10 @@ import HelloWorld from './components/HelloWorld.vue'
   .logo.vuefire {
     height: 5em;
   }
+}
+
+.logo.github {
+  height: 1em;
+  padding: 0 0.15em;
 }
 </style>
