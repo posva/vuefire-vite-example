@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import {
   doc,
-  updateDoc,
   increment,
   serverTimestamp,
   Timestamp,
+  setDoc,
+  updateDoc,
 } from 'firebase/firestore'
 import { computed } from 'vue'
 import { useDocument, useFirestore } from 'vuefire'
@@ -33,12 +34,19 @@ const todaysCountDoc = computed(() =>
 )
 
 function incrementCount() {
-  return updateDoc(todaysCountDoc.value, {
-    // increment is a special value that enables increments
-    n: increment(1),
-    // serverTimestamp is a special value that sets the current time
-    when: serverTimestamp(),
-  })
+  if (count.value) {
+    return updateDoc(todaysCountDoc.value, {
+      // increment is a special value that enables increments
+      n: increment(1),
+      // serverTimestamp is a special value that sets the current time
+      when: serverTimestamp(),
+    })
+  } else {
+    return setDoc(todaysCountDoc.value, {
+      n: 0,
+      when: serverTimestamp(),
+    })
+  }
 }
 
 const { data: count, pending } = useDocument(todaysCountDoc)
@@ -52,10 +60,12 @@ const elapsedSeconds = useInterval(1000)
 const rtf = new Intl.RelativeTimeFormat('en', { style: 'long' })
 function fromNow(date: Timestamp) {
   const now = START + elapsedSeconds.value * 1000
-  return rtf.format(
-    Math.floor(((date.toMillis() ?? now) - now) / 1000),
-    'second'
+  const sinceDate = Math.min(
+    // only allow negative values
+    -1,
+    Math.floor(((date.toMillis() ?? now) - now) / 1000)
   )
+  return rtf.format(sinceDate, 'second')
 }
 </script>
 
