@@ -37,3 +37,7 @@ Make sure to change the `public` directory to `dist`, configure as a single-page
 ## GitHub Workflows
 
 The GitHub workflows you will find in this repository have been adapted from the generated ones to include a cache with pnpm.
+
+## Firebase config
+
+If you want to use this repository as a starter for your project, make sure to replace the different firebase files with your own or simply, run `firebase init` to override them. You will also need to update the config in `main.ts` with your own.
